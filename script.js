@@ -295,8 +295,18 @@ function setupAdminConsole({ adminSection, form, imageList, previewWrapper, prev
     }
 
     function buildPostFromForm() {
-        const textarea = document.getElementById('post-body');
-        const text = textarea ? textarea.value.trim() : '';
+        const postBodyEl = document.getElementById('post-body');
+        let text = '';
+
+        if (postBodyEl) {
+            if (postBodyEl.isContentEditable) {
+                text = (postBodyEl.innerText || '').trim();
+            } else if ('value' in postBodyEl) {
+                text = (postBodyEl.value || '').trim();
+            } else {
+                text = (postBodyEl.textContent || '').trim();
+            }
+        }
 
         // Log raw post text and its length for debugging
         console.log('POST TEXT RAW ->[' + text + ']<- length:', text?.length);
@@ -544,16 +554,4 @@ function setupAdminConsole({ adminSection, form, imageList, previewWrapper, prev
             }
             try {
                 const { error } = await supabase.auth.signOut();
-                if (error) {
-                    alert(error.message || 'Logout failed');
-                    return;
-                }
-                alert('Logged out');
-                // Optionally, refresh or redirect after logout
-                window.location.reload();
-            } catch (err) {
-                alert(err?.message || 'Logout failed');
-            }
-        });
-    }
-})();
+                if
