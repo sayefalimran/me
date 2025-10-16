@@ -435,6 +435,11 @@ function setupAdminConsole({ adminSection, form, imageList, previewWrapper, prev
         }
     }
 
+    // add a small wrapper used by other handlers
+    async function loadPosts() {
+        await fetchAndRenderPosts();
+    }
+
     // login handler
     if (loginForm) {
         loginForm.addEventListener('submit', async (ev) => {
@@ -508,7 +513,9 @@ function setupAdminConsole({ adminSection, form, imageList, previewWrapper, prev
                 }]);
 
                 if (error) {
-                    alert(error.message || 'Publish failed');
+                    // follow requested error handling
+                    alert(error.message);
+                    console.error(error);
                     return;
                 }
 
@@ -521,14 +528,12 @@ function setupAdminConsole({ adminSection, form, imageList, previewWrapper, prev
                     if (imgs) imgs.value = '';
                 }
 
-                alert('Published successfully.');
-                // reload posts
-                if (typeof fetchAndRenderPosts === 'function') {
-                    await fetchAndRenderPosts();
-                }
+                // after successful insert, reload posts
+                await loadPosts();
             } catch (err) {
-                console.error(err);
+                // follow requested error handling
                 alert(err?.message || 'Publish failed');
+                console.error(err);
             }
         });
     } else {
@@ -556,4 +561,6 @@ function setupAdminConsole({ adminSection, form, imageList, previewWrapper, prev
             }
         });
     }
+
+    fetchAndRenderPosts();
 })();
