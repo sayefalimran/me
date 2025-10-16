@@ -130,6 +130,46 @@
         <p>Peek behind the scenes at fresh interface explorations, sketches, and product updates.</p>
         <a class="btn btn-updates" href="updates.html" aria-label="Go to Updates">Updates</a>
     </section>
+
+    <!-- Admin: updates-admin (login + console) -->
+    <section id="updates-admin" aria-labelledby="updates-admin-title">
+        <h2 id="updates-admin-title" class="sr-only">Updates Admin</h2>
+
+        <!-- Login form -->
+        <form id="login-form" class="admin-login" aria-label="Admin login">
+            <div class="form-group">
+                <label for="admin-email">Email</label>
+                <input type="email" id="admin-email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="admin-password">Password</label>
+                <input type="password" id="admin-password" name="password" required>
+            </div>
+            <div class="form-submit">
+                <button type="submit" class="btn">Sign in</button>
+            </div>
+        </form>
+
+        <!-- Admin console (initially hidden) -->
+        <div id="admin-console" hidden>
+            <div class="form-group">
+                <label for="post-body">Post body</label>
+                <textarea id="post-body" name="body" rows="6"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="post-images">Images (comma-separated URLs)</label>
+                <input type="text" id="post-images" name="images" placeholder="https://... , https://...">
+            </div>
+            <div class="form-actions">
+                <button id="publish-btn" class="btn btn-primary" type="button">Publish</button>
+                <button id="logout-btn" class="btn btn-outline" type="button">Sign out</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Status and feed containers (used by admin/scripts) -->
+    <div id="status"></div>
+    <div id="feed"></div>
     </main>
 
     <!-- Footer -->
@@ -167,6 +207,15 @@
         </div>
     </footer>
 
+    <script type="module">
+        <!-- Import createClient from esm.sh CDN and expose to window -->
+        import { createClient } from "https://esm.sh/@supabase/supabase-js";
+
+        const SUPABASE_URL = "https://pqanujauttrxzokqoysh.supabase.co";
+        const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBxYW51amF1dHRyeHpva3FveXNoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjA2MjY3NTMsImV4cCI6MjA3NjIwMjc1M30.S39flwhRi0apHVYCL0em__lI-xVBHXC312mtQ5c_n8E";
+
+        window.supabaseClient = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    </script>
     <script src="script.js"></script>
 </body>
 </html>

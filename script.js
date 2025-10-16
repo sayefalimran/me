@@ -386,3 +386,38 @@ function setupAdminConsole({ adminSection, form, imageList, previewWrapper, prev
         });
     }
 }
+
+(function () {
+    if (!window.supabaseClient) {
+        console.warn('Supabase client not found on window.supabaseClient — skipping Supabase integration.');
+        return;
+    }
+    const supabase = window.supabaseClient;
+    const statusEl = document.getElementById('status');
+    const feedEl = document.getElementById('feed');
+    const loginForm = document.getElementById('login-form');
+    const adminConsole = document.getElementById('admin-console');
+    const publishBtn = document.getElementById('publish-btn');
+    const logoutBtn = document.getElementById('logout-btn');
+
+    async function setStatus(message, hideWhenEmpty = true) {
+        if (!statusEl) return;
+        if (!message && hideWhenEmpty) {
+            statusEl.hidden = true;
+            statusEl.textContent = '';
+        } else {
+            statusEl.hidden = false;
+            statusEl.textContent = message || '';
+        }
+    }
+
+    async function fetchAndRenderPosts() {
+        if (!feedEl) return;
+        setStatus('Loading updates…', false);
+        try {
+            const { data, error } = await supabase
+                .from('posts')
+                .select('*')
+                .order('created_at', { ascending: false });
+
+            if
