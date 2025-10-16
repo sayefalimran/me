@@ -1,0 +1,172 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Md Sayef Al Imran - UI/UX Designer</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-inner">
+            <!-- Header title now links home; update href if you deploy from a subdirectory -->
+            <a href="index.html" class="site-title" aria-label="Go to homepage">Md Sayef Al Imran</a>
+            <nav>
+                <ul>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#contact">Contacts</a></li>
+                </ul>
+            </nav>
+        </div>
+        <div class="wave wave-header" aria-hidden="true">
+            <svg viewBox="0 0 1440 100" preserveAspectRatio="none">
+                <!-- Adjust this path or --wave-height in styles.css if the header wave ever needs a new amplitude -->
+                <path class="wave-path" d="M0,60 C240,20 480,100 720,60 C960,20 1200,100 1440,60 L1440,100 L0,100 Z"></path>
+            </svg>
+        </div>
+    </header>
+    <main>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h3>UI/UX DESIGNER</h3>
+            <h1>Hello, my name is Md Sayef Al Imran</h1>
+            <p>Short text with details about you, what you do or your professional career. You can add more information on the about page.</p>
+            <div class="hero-buttons">
+                <a href="#projects" class="btn btn-primary">Projects</a>
+                <a href="https://linkedin.com" target="_blank" class="btn btn-outline">LinkedIn</a>
+            </div>
+        </div>
+        <div class="hero-image-wrapper">
+            <div class="yellow-blob"></div>
+            <!-- REPLACE IMAGE: Change src to images/hero.jpg -->
+            <img src="images/hero.jpg" alt="Md Sayef Al Imran smiling head and shoulders portrait with neutral studio background professional and approachable tone" class="hero-image">
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="about-content">
+            <h2>About me</h2>
+            <p>Nisl arcu, scelerisque neque ut. Tincidunt amet, tempor duis tortor neque auctor dis ipsum. Pretium cras amet odio amet eleifend id sed cras sed. Aliquet risus posuere aliquet imperdiet sit.</p>
+            <a href="#" class="btn btn-primary">Resume</a>
+        </div>
+        <div class="about-image-wrapper">
+            <div class="yellow-blob"></div>
+            <!-- REPLACE IMAGE: Change src to images/about-main.jpg -->
+            <img src="images/about-main.jpg" alt="Md Sayef Al Imran professional photo" class="about-image">
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="projects" id="projects">
+        <h2 class="section-title">Projects</h2>
+        
+        <div class="project-card">
+            <div class="project-content">
+                <h3>Project Name</h3>
+                <p>I created this personal project in order to show how to create an interface in Figma using a portfolio as an example.</p>
+                <a href="#" class="btn btn-outline">View Project</a>
+            </div>
+            <div class="project-image">
+                <!-- REPLACE IMAGE: Change src to images/project1.jpg -->
+                <img src="images/project1.jpg" alt="Project 1 - UI/UX Design showcase">
+            </div>
+        </div>
+
+        <div class="project-card">
+            <div class="project-content">
+                <h3>Project Name</h3>
+                <p>What was your role, your deliverables, if the project was personal, freelancing, or professional.</p>
+                <a href="#" class="btn btn-outline">View Project</a>
+            </div>
+            <div class="project-image">
+                <!-- REPLACE IMAGE: Change src to images/project2.jpg -->
+                <img src="images/project2.jpg" alt="Project 2 - Design work example">
+            </div>
+        </div>
+
+        <div class="project-card">
+            <div class="project-content">
+                <h3>Project Name</h3>
+                <p>You can also add in this description the type of the project, if it was for web, mobile, electron.</p>
+                <a href="#" class="btn btn-outline">View Project</a>
+            </div>
+            <div class="project-image">
+                <!-- REPLACE IMAGE: Change src to images/project3.jpg -->
+                <img src="images/project3.jpg" alt="Project 3 - Portfolio piece">
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <h2 class="section-title">Contact</h2>
+        <form class="contact-form">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="message">Message</label>
+                <textarea id="message" name="message" required></textarea>
+            </div>
+            <div class="form-submit">
+                <button type="submit" class="btn btn-primary">Send</button>
+            </div>
+        </form>
+    </section>
+
+    <!-- Updates CTA -->
+    <section class="updates-cta" aria-labelledby="updates-cta-title">
+        <h2 id="updates-cta-title">Stay in the Loop</h2>
+        <p>Peek behind the scenes at fresh interface explorations, sketches, and product updates.</p>
+        <a class="btn btn-updates" href="updates.html" aria-label="Go to Updates">Updates</a>
+    </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="wave wave-footer" aria-hidden="true">
+            <svg viewBox="0 0 1440 100" preserveAspectRatio="none">
+                <!-- Header/footer waves share this path; tweak d or --wave-height for a different curve -->
+                <path class="wave-path" d="M0,60 C240,20 480,100 720,60 C960,20 1200,100 1440,60 L1440,100 L0,100 Z"></path>
+            </svg>
+        </div>
+        <div class="footer-content">
+            <div class="social-links">
+                <a href="https://instagram.com" target="_blank" aria-label="Instagram">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                    </svg>
+                </a>
+                <a href="https://linkedin.com" target="_blank" aria-label="LinkedIn">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                        <rect x="2" y="9" width="4" height="12"></rect>
+                        <circle cx="4" cy="4" r="2"></circle>
+                    </svg>
+                </a>
+                <a href="mailto:contact@example.com" aria-label="Email">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                        <polyline points="22,6 12,13 2,6"></polyline>
+                    </svg>
+                </a>
+            </div>
+            <p class="copyright">Md Sayef Al Imran 2025</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

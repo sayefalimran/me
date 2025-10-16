@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Updates - Md Sayef Al Imran</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-inner">
+            <!-- Header title now links home; update href if you deploy from a subdirectory -->
+            <a href="index.html" class="site-title" aria-label="Go to homepage">Md Sayef Al Imran</a>
+            <nav>
+                <ul>
+                    <li><a href="index.html#about">About</a></li>
+                    <li><a href="index.html#projects">Projects</a></li>
+                    <li><a href="index.html#contact">Contacts</a></li>
+                </ul>
+            </nav>
+        </div>
+        <div class="wave wave-header" aria-hidden="true">
+            <svg viewBox="0 0 1440 100" preserveAspectRatio="none">
+                <!-- Adjust this path or --wave-height in styles.css if the header wave ever needs a new amplitude -->
+                <path class="wave-path" d="M0,60 C240,20 480,100 720,60 C960,20 1200,100 1440,60 L1440,100 L0,100 Z"></path>
+            </svg>
+        </div>
+    </header>
+
+    <main class="updates-main">
+        <section class="updates-intro">
+            <h1>Updates</h1>
+            <p>Inside looks at ongoing UI explorations, product experiments, and event highlights. Bookmark this page to keep up with the latest.</p>
+        </section>
+
+        <section class="updates-feed-section" aria-labelledby="updates-feed-heading">
+            <h2 id="updates-feed-heading" class="updates-feed-heading">Latest posts</h2>
+            <div id="updates-feed" class="updates-feed" aria-live="polite"></div>
+            <p id="updates-status" class="updates-empty" role="status" hidden>Loading updates…</p>
+
+            <section class="updates-admin" id="updates-admin" hidden aria-labelledby="updates-admin-title">
+                <div>
+                    <h2 id="updates-admin-title">Owner Console</h2>
+                    <p>This lightweight console is only for you. Append <code>?admin=letmein</code> once (or change the token in <code>script.js</code>) to unlock it, draft a post, then download the updated <code>posts.json</code>.</p>
+                </div>
+                <form id="admin-post-form">
+                    <div>
+                        <label for="admin-post-text">Post text</label>
+                        <textarea id="admin-post-text" name="postText" rows="5" placeholder="Share what’s new…" required></textarea>
+                    </div>
+                    <div class="admin-image-list" data-role="image-list">
+                        <!-- JS injects image URL + alt text rows here -->
+                    </div>
+                    <div class="admin-controls">
+                        <button type="button" class="secondary" id="add-image-field">Add image field</button>
+                        <button type="button" class="primary" id="preview-post">Preview</button>
+                        <button type="button" class="secondary" id="download-json">Download JSON</button>
+                    </div>
+                </form>
+                <div class="admin-preview" id="admin-preview" hidden>
+                    <h3>Preview</h3>
+                    <div id="admin-preview-target"></div>
+                </div>
+            </section>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="wave wave-footer" aria-hidden="true">
+            <svg viewBox="0 0 1440 100" preserveAspectRatio="none">
+                <!-- Header/footer waves share this path; tweak d or --wave-height for a different curve -->
+                <path class="wave-path" d="M0,60 C240,20 480,100 720,60 C960,20 1200,100 1440,60 L1440,100 L0,100 Z"></path>
+            </svg>
+        </div>
+        <div class="footer-content">
+            <div class="social-links">
+                <a href="https://instagram.com" target="_blank" aria-label="Instagram">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                    </svg>
+                </a>
+                <a href="https://linkedin.com" target="_blank" aria-label="LinkedIn">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                        <rect x="2" y="9" width="4" height="12"></rect>
+                        <circle cx="4" cy="4" r="2"></circle>
+                    </svg>
+                </a>
+                <a href="mailto:contact@example.com" aria-label="Email">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                        <polyline points="22,6 12,13 2,6"></polyline>
+                    </svg>
+                </a>
+            </div>
+            <p class="copyright">Md Sayef Al Imran 2025</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

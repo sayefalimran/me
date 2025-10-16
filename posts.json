@@ -1,0 +1,37 @@
+﻿[
+  {
+    "id": "post-003",
+    "author": "Md Sayef Al Imran",
+    "timestamp": "2025-10-15T08:30:00Z",
+    "text": "Polishing the onboarding flow and dialing in the motion states for the welcome sequence. The new visuals feel so much more inviting.",
+    "images": [
+      {
+        "src": "images/project3.jpg",
+        "alt": "Mobile onboarding mockups arranged on a light desk"
+      }
+    ]
+  },
+  {
+    "id": "post-002",
+    "author": "Md Sayef Al Imran",
+    "timestamp": "2025-10-05T17:45:00Z",
+    "text": "Kicked off a journal series about design systems. The first chapter walks through how I translate brand palettes into usable color tokens.\nRead it here: https://example.com/journal/design-tokens",
+    "images": []
+  },
+  {
+    "id": "post-001",
+    "author": "Md Sayef Al Imran",
+    "timestamp": "2025-09-28T11:20:00Z",
+    "text": "Spent the afternoon sketching ideas for a wellness dashboard. Can't wait to put these concepts in front of users next week.",
+    "images": [
+      {
+        "src": "images/project1.jpg",
+        "alt": "Sketchbook page filled with interface wireframes"
+      },
+      {
+        "src": "images/project2.jpg",
+        "alt": "Workspace setup with design notes and a laptop"
+      }
+    ]
+  }
+]
