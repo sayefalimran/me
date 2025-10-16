@@ -479,3 +479,25 @@ function setupAdminConsole({ adminSection, form, imageList, previewWrapper, prev
 
     fetchAndRenderPosts();
 })();
+
+// Add simple click logging for publish and logout buttons
+;(function () {
+    const publishBtn = document.getElementById('publish-btn');
+    const logoutBtn = document.getElementById('logout-btn');
+
+    if (publishBtn) {
+        publishBtn.addEventListener('click', () => {
+            console.log('publish-btn clicked');
+        });
+    } else {
+        console.log('publish-btn not found');
+    }
+
+    if (logoutBtn) {
+        logoutBtn.addEventListener('click', () => {
+            console.log('logout-btn clicked');
+        });
+    } else {
+        console.log('logout-btn not found');
+    }
+})();
