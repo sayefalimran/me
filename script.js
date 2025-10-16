@@ -295,31 +295,24 @@ function setupAdminConsole({ adminSection, form, imageList, previewWrapper, prev
     }
 
     function buildPostFromForm() {
-        const textField = document.getElementById('admin-post-text');
-        const text = textField ? textField.value.trim() : '';
+        const consoleEl = document.getElementById('admin-console');
+        const textarea = consoleEl ? consoleEl.querySelector('textarea') : document.querySelector('textarea');
+        const text = textarea ? textarea.value.trim() : '';
         if (!text) {
-            alert('Please add some text before previewing or downloading.');
             return null;
         }
 
-        const images = [];
-        imageList.querySelectorAll('[data-image-row]').forEach((row, index) => {
-            const urlInput = row.querySelector('[data-image-url]');
-            const altInput = row.querySelector('[data-image-alt]');
-            const src = urlInput ? urlInput.value.trim() : '';
-            const alt = altInput ? altInput.value.trim() : '';
-            if (src) {
-                images.push({ src, alt: alt || `Update image ${index + 1}` });
-            }
-        });
+        const imagesInput = consoleEl
+            ? consoleEl.querySelector('input[name="images"]')
+            : document.querySelector('input[name="images"]');
+        const raw = imagesInput ? imagesInput.value : '';
+        const images = raw
+            .split(',')
+            .map(s => s.trim())
+            .filter(Boolean)
+            .map(src => ({ src, alt: '' }));
 
-        return {
-            id: `post-${Date.now()}`,
-            author: OWNER_NAME,
-            timestamp: new Date().toISOString(),
-            text,
-            images
-        };
+        return { text, images };
     }
 
     function addImageRow(url = '', alt = '') {
@@ -467,37 +460,92 @@ function setupAdminConsole({ adminSection, form, imageList, previewWrapper, prev
     // Supabase auth state listener: log event/session and toggle admin UI
     supabase.auth.onAuthStateChange((event, session) => {
         console.log('auth state change:', event, session);
+
+        // Ensure the admin wrapper is visible in the DOM
         const updatesAdminEl = document.getElementById('updates-admin');
         if (updatesAdminEl) updatesAdminEl.hidden = false;
 
-        const adminLoginEl = document.getElementById('admin-login');
+        // Hide the admin login UI when session exists.
+        // The page currently uses id="login-form", but some code references #admin-login —
+        // check both and apply the same behavior.
+        const adminLoginEl = document.getElementById('admin-login') || document.getElementById('login-form');
         if (adminLoginEl) adminLoginEl.hidden = !!session;
 
+        // Show the admin console only when a session exists
         const adminConsoleEl = document.getElementById('admin-console');
         if (adminConsoleEl) adminConsoleEl.hidden = !session;
     });
 
-    fetchAndRenderPosts();
-})();
-
-// Add simple click logging for publish and logout buttons
-;(function () {
-    const publishBtn = document.getElementById('publish-btn');
-    const logoutBtn = document.getElementById('logout-btn');
-
+    // publish handler: build post, insert into Supabase, clear form, reload posts
     if (publishBtn) {
-        publishBtn.addEventListener('click', () => {
-            console.log('publish-btn clicked');
+        publishBtn.addEventListener('click', async () => {
+            const post = (typeof buildPostFromForm === 'function') ? buildPostFromForm() : null;
+            if (!post) {
+                alert('Please add some text before publishing.');
+                return;
+            }
+
+            if (!supabase) {
+                alert('Supabase client not available.');
+                return;
+            }
+
+            try {
+                const { error } = await supabase.from('posts').insert([{
+                    author: 'Sayef Imran',
+                    text: post.text,
+                    images: post.images
+                }]);
+
+                if (error) {
+                    alert(error.message || 'Publish failed');
+                    return;
+                }
+
+                // clear form fields inside admin console
+                const consoleEl = document.getElementById('admin-console');
+                if (consoleEl) {
+                    const ta = consoleEl.querySelector('textarea');
+                    if (ta) ta.value = '';
+                    const imgs = consoleEl.querySelector('input[name="images"]');
+                    if (imgs) imgs.value = '';
+                }
+
+                alert('Published successfully.');
+                // reload posts
+                if (typeof fetchAndRenderPosts === 'function') {
+                    await fetchAndRenderPosts();
+                }
+            } catch (err) {
+                console.error(err);
+                alert(err?.message || 'Publish failed');
+            }
         });
     } else {
         console.log('publish-btn not found');
     }
 
+    // logout handler: sign out via Supabase, alert on error, log success
     if (logoutBtn) {
-        logoutBtn.addEventListener('click', () => {
-            console.log('logout-btn clicked');
+        logoutBtn.addEventListener('click', async () => {
+            if (!supabase) {
+                alert('Supabase client not available.');
+                return;
+            }
+            try {
+                const { error } = await supabase.auth.signOut();
+                if (error) {
+                    alert(error.message || 'Sign-out failed');
+                    return;
+                }
+                console.log('signed out');
+            } catch (err) {
+                alert(err?.message || 'Sign-out failed');
+            }
         });
     } else {
         console.log('logout-btn not found');
     }
+
+    fetchAndRenderPosts();
 })();
