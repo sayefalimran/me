@@ -420,4 +420,62 @@ function setupAdminConsole({ adminSection, form, imageList, previewWrapper, prev
                 .select('*')
                 .order('created_at', { ascending: false });
 
-            if
+            if (error) {
+                throw error;
+            }
+            renderPosts(feedEl, data);
+            setStatus('');
+        } catch (err) {
+            console.error(err);
+            renderPosts(feedEl, []);
+            setStatus('Unable to load updates right now. Please retry later.');
+        }
+    }
+
+    // login handler
+    if (loginForm) {
+        loginForm.addEventListener('submit', async (ev) => {
+            ev.preventDefault();
+            const emailInput = loginForm.querySelector('input[name="email"]');
+            const passInput = loginForm.querySelector('input[name="password"]');
+            const email = emailInput ? emailInput.value.trim() : '';
+            const password = passInput ? passInput.value : '';
+            if (!email || !password) {
+                alert('Please provide email and password.');
+                return;
+            }
+            try {
+                const { error } = await supabase.auth.signInWithPassword({ email, password });
+                if (error) {
+                    alert(error.message || 'Sign-in failed');
+                    return;
+                }
+                // success: reset form and refresh posts
+                loginForm.reset();
+                alert('Signed in');
+                await fetchAndRenderPosts();
+            } catch (err) {
+                alert(err?.message || 'Sign-in failed');
+            }
+        });
+    }
+
+    if (adminConsole) {
+        adminConsole.hidden = true;
+    }
+
+    // Supabase auth state listener: log event/session and toggle admin UI
+    supabase.auth.onAuthStateChange((event, session) => {
+        console.log('auth state change:', event, session);
+        const updatesAdminEl = document.getElementById('updates-admin');
+        if (updatesAdminEl) updatesAdminEl.hidden = false;
+
+        const adminLoginEl = document.getElementById('admin-login');
+        if (adminLoginEl) adminLoginEl.hidden = !!session;
+
+        const adminConsoleEl = document.getElementById('admin-console');
+        if (adminConsoleEl) adminConsoleEl.hidden = !session;
+    });
+
+    fetchAndRenderPosts();
+})();
