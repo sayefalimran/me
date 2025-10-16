@@ -4,30 +4,365 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Md Sayef Al Imran - UI/UX Designer</title>
-    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* CSS Variables for easy customization */
+        :root {
+            --primary-yellow: #FFC42D;
+            --text-dark: #1a1a1a;
+            --text-gray: #6b6b6b;
+            --white: #ffffff;
+            --light-bg: #f8f8f8;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Header Navigation */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 5%;
+            background: var(--white);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .logo {
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: var(--text-dark);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-size: 0.95rem;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        nav a:hover {
+            color: var(--primary-yellow);
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-yellow);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            gap: 4rem;
+            padding: 4rem 5% 6rem;
+            min-height: 85vh;
+        }
+
+        .hero-content h3 {
+            color: var(--primary-yellow);
+            font-size: 0.9rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+
+        .hero-content h1 {
+            font-size: 3rem;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+        }
+
+        .hero-content p {
+            color: var(--text-gray);
+            font-size: 1rem;
+            margin-bottom: 2rem;
+            max-width: 500px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 0.75rem 2rem;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            border: 2px solid transparent;
+        }
+
+        .btn-primary {
+            background: var(--primary-yellow);
+            color: var(--text-dark);
+            border-color: var(--primary-yellow);
+        }
+
+        .btn-primary:hover {
+            background: #f5b71a;
+            border-color: #f5b71a;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255, 196, 45, 0.3);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--text-dark);
+            border-color: var(--text-dark);
+        }
+
+        .btn-outline:hover {
+            background: var(--text-dark);
+            color: var(--white);
+            transform: translateY(-2px);
+        }
+
+        /* Image Container with Yellow Blob */
+        .hero-image-wrapper {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .yellow-blob {
+            position: absolute;
+            width: 420px;
+            height: 420px;
+            background: var(--primary-yellow);
+            border-radius: 50% 40% 60% 50%;
+            z-index: 1;
+        }
+
+        .hero-image, .about-image {
+            /* Image placeholder - Replace with actual image path */
+            width: 420px;
+            height: 420px;
+            border-radius: 50%;
+            object-fit: cover;
+            position: relative;
+            z-index: 2;
+            filter: grayscale(100%);
+        }
+
+        /* About Section */
+        .about {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            gap: 4rem;
+            padding: 6rem 5%;
+            background: var(--white);
+        }
+
+        .about-content h2 {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+        }
+
+        .about-content p {
+            color: var(--text-gray);
+            font-size: 1rem;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+            max-width: 500px;
+        }
+
+        .about-image-wrapper {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Projects Section */
+        .projects {
+            padding: 6rem 5%;
+            background: var(--light-bg);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 4rem;
+            position: relative;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--primary-yellow);
+        }
+
+        .project-card {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+            background: var(--white);
+            border-radius: 12px;
+            padding: 3rem;
+            margin-bottom: 3rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            margin-bottom: 1.5rem;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px;
+            height: 45px;
+            background: var(--text-dark);
+            color: var(--white);
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: var(--primary-yellow);
+            color: var(--text-dark);
+            transform: translateY(-3px);
+        }
+
+        .social-links svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        .copyright {
+            color: var(--text-gray);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 968px) {
+            .hero, .about, .project-card {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .hero-content h1, .about-content h2, .section-title {
+                font-size: 2.5rem;
+            }
+
+            .hero-image-wrapper, .about-image-wrapper {
+                order: -1;
+            }
+
+            .yellow-blob, .hero-image, .about-image {
+                width: 320px;
+                height: 320px;
+            }
+
+            nav ul {
+                gap: 1.5rem;
+            }
+
+            .project-card:nth-child(even) .project-content {
+                order: 1;
+            }
+
+            .project-card:nth-child(even) .project-image {
+                order: 2;
+            }
+        }
+
+        @media (max-width: 568px) {
+            header {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            nav ul {
+                gap: 1rem;
+            }
+
+            .hero-content h1, .about-content h2, .section-title {
+                font-size: 2rem;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+            }
+
+            .btn {
+                text-align: center;
+            }
+
+            .project-card {
+                padding: 2rem;
+            }
+        }
+    </style>
 </head>
 <body>
     <!-- Header -->
     <header>
-        <div class="header-inner">
-            <!-- Header title now links home; update href if you deploy from a subdirectory -->
-            <a href="index.html" class="site-title" aria-label="Go to homepage">Md Sayef Al Imran</a>
-            <nav>
-                <ul>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#projects">Projects</a></li>
-                    <li><a href="#contact">Contacts</a></li>
-                </ul>
-            </nav>
-        </div>
-        <div class="wave wave-header" aria-hidden="true">
-            <svg viewBox="0 0 1440 100" preserveAspectRatio="none">
-                <!-- Adjust this path or --wave-height in styles.css if the header wave ever needs a new amplitude -->
-                <path class="wave-path" d="M0,60 C240,20 480,100 720,60 C960,20 1200,100 1440,60 L1440,100 L0,100 Z"></path>
-            </svg>
-        </div>
+        <div class="logo">Md Sayef Al Imran</div>
+        <nav>
+            <ul>
+                <li><a href="#about">About</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contacts</a></li>
+            </ul>
+        </nav>
     </header>
-    <main>
 
     <!-- Hero Section -->
     <section class="hero">
@@ -42,8 +377,8 @@
         </div>
         <div class="hero-image-wrapper">
             <div class="yellow-blob"></div>
-            <!-- REPLACE IMAGE: Change src to images/hero.jpg -->
-            <img src="images/hero.jpg" alt="Md Sayef Al Imran smiling head and shoulders portrait with neutral studio background professional and approachable tone" class="hero-image">
+            <!-- REPLACE IMAGE: Change src to assets/images/hero.jpg -->
+            <img src="assets/images/hero.jpg" alt="Md Sayef Al Imran smiling head and shoulders portrait with neutral studio background professional and approachable tone" class="hero-image">
         </div>
     </section>
 
@@ -56,8 +391,8 @@
         </div>
         <div class="about-image-wrapper">
             <div class="yellow-blob"></div>
-            <!-- REPLACE IMAGE: Change src to images/about-main.jpg -->
-            <img src="images/about-main.jpg" alt="Md Sayef Al Imran professional photo" class="about-image">
+            <!-- REPLACE IMAGE: Change src to assets/images/about.jpg -->
+            <img src="assets/images/about.jpg" alt="Md Sayef Al Imran professional photo" class="about-image">
         </div>
     </section>
 
@@ -72,8 +407,8 @@
                 <a href="#" class="btn btn-outline">View Project</a>
             </div>
             <div class="project-image">
-                <!-- REPLACE IMAGE: Change src to images/project1.jpg -->
-                <img src="images/project1.jpg" alt="Project 1 - UI/UX Design showcase">
+                <!-- REPLACE IMAGE: Change src to assets/images/project1.jpg -->
+                <img src="assets/images/project1.jpg" alt="Project 1 - UI/UX Design showcase">
             </div>
         </div>
 
@@ -84,8 +419,8 @@
                 <a href="#" class="btn btn-outline">View Project</a>
             </div>
             <div class="project-image">
-                <!-- REPLACE IMAGE: Change src to images/project2.jpg -->
-                <img src="images/project2.jpg" alt="Project 2 - Design work example">
+                <!-- REPLACE IMAGE: Change src to assets/images/project2.jpg -->
+                <img src="assets/images/project2.jpg" alt="Project 2 - Design work example">
             </div>
         </div>
 
@@ -96,8 +431,8 @@
                 <a href="#" class="btn btn-outline">View Project</a>
             </div>
             <div class="project-image">
-                <!-- REPLACE IMAGE: Change src to images/project3.jpg -->
-                <img src="images/project3.jpg" alt="Project 3 - Portfolio piece">
+                <!-- REPLACE IMAGE: Change src to assets/images/project3.jpg -->
+                <img src="assets/images/project3.jpg" alt="Project 3 - Portfolio piece">
             </div>
         </div>
     </section>
@@ -124,22 +459,8 @@
         </form>
     </section>
 
-    <!-- Updates CTA -->
-    <section class="updates-cta" aria-labelledby="updates-cta-title">
-        <h2 id="updates-cta-title">Stay in the Loop</h2>
-        <p>Peek behind the scenes at fresh interface explorations, sketches, and product updates.</p>
-        <a class="btn btn-updates" href="updates.html" aria-label="Go to Updates">Updates</a>
-    </section>
-    </main>
-
     <!-- Footer -->
     <footer>
-        <div class="wave wave-footer" aria-hidden="true">
-            <svg viewBox="0 0 1440 100" preserveAspectRatio="none">
-                <!-- Header/footer waves share this path; tweak d or --wave-height for a different curve -->
-                <path class="wave-path" d="M0,60 C240,20 480,100 720,60 C960,20 1200,100 1440,60 L1440,100 L0,100 Z"></path>
-            </svg>
-        </div>
         <div class="footer-content">
             <div class="social-links">
                 <a href="https://instagram.com" target="_blank" aria-label="Instagram">
@@ -165,8 +486,59 @@
             </div>
             <p class="copyright">Md Sayef Al Imran 2025</p>
         </div>
+        <div class="wave-decoration"></div>
     </footer>
 
-    <script src="script.js"></script>
+    <script>
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Form submission handler
+        document.querySelector('.contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thank you for your message! I will get back to you soon.');
+            this.reset();
+        });
+    </script>
+    <script type="module">
+   import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+  const SUPABASE_URL = "https://pqanujauttrxzokqoysh.supabase.co";
+  const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBxYW51amF1dHRyeHpva3FveXNoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjA2MjY3NTMsImV4cCI6MjA3NjIwMjc1M30.S39flwhRi0apHVYCL0em__lI-xVBHXC312mtQ5c_n8E";
+  const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+  window.supabaseClient = supabase;
+</script>
+
+<section id="updates-admin" hidden>
+  <div id="admin-login">
+    <form id="login-form">
+      <input type="email" name="email" placeholder="Email" required>
+      <input type="password" name="password" placeholder="Password" required>
+      <button type="submit">Sign in</button>
+    </form>
+  </div>
+  <div id="admin-console" hidden>
+    <textarea placeholder="Write an update..." rows="4"></textarea>
+    <input name="images" placeholder="Image URLs (comma separated)">
+    <button type="button" id="publish-btn">Publish</button>
+    <button type="button" id="logout-btn">Sign out</button>
+  </div>
+</section>
+
+<div id="status"></div>
+<div id="feed"></div>
+
+<script type="module" src="script.js"></script>
+
 </body>
 </html>
