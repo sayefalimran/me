@@ -295,16 +295,18 @@ function setupAdminConsole({ adminSection, form, imageList, previewWrapper, prev
     }
 
     function buildPostFromForm() {
-        const consoleEl = document.getElementById('admin-console');
-        const textarea = consoleEl ? consoleEl.querySelector('textarea') : document.querySelector('textarea');
+        const textarea = document.getElementById('post-body');
         const text = textarea ? textarea.value.trim() : '';
+
+        // Log raw post text and its length for debugging
+        console.log('POST TEXT RAW ->[' + text + ']<- length:', text?.length);
+
         if (!text) {
+            alert('Please add some text before previewing or downloading.');
             return null;
         }
 
-        const imagesInput = consoleEl
-            ? consoleEl.querySelector('input[name="images"]')
-            : document.querySelector('input[name="images"]');
+        const imagesInput = document.querySelector('input[name="images"]');
         const raw = imagesInput ? imagesInput.value : '';
         const images = raw
             .split(',')
@@ -392,6 +394,14 @@ function setupAdminConsole({ adminSection, form, imageList, previewWrapper, prev
     const adminConsole = document.getElementById('admin-console');
     const publishBtn = document.getElementById('publish-btn');
     const logoutBtn = document.getElementById('logout-btn');
+
+    // If the publish button is inside a form, prevent that form's submit (publish uses JS)
+    if (publishBtn) {
+        const parentForm = publishBtn.closest('form');
+        if (parentForm) {
+            parentForm.addEventListener('submit', (ev) => ev.preventDefault());
+        }
+    }
 
     async function setStatus(message, hideWhenEmpty = true) {
         if (!statusEl) return;
@@ -535,17 +545,15 @@ function setupAdminConsole({ adminSection, form, imageList, previewWrapper, prev
             try {
                 const { error } = await supabase.auth.signOut();
                 if (error) {
-                    alert(error.message || 'Sign-out failed');
+                    alert(error.message || 'Logout failed');
                     return;
                 }
-                console.log('signed out');
+                alert('Logged out');
+                // Optionally, refresh or redirect after logout
+                window.location.reload();
             } catch (err) {
-                alert(err?.message || 'Sign-out failed');
+                alert(err?.message || 'Logout failed');
             }
         });
-    } else {
-        console.log('logout-btn not found');
     }
-
-    fetchAndRenderPosts();
 })();
